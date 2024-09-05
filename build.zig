@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
 
     var lib = b.addStaticLibrary(.{
-        .name = "zlib",
+        .name = "z",
         .target = target,
         .optimize = optimize,
     });
