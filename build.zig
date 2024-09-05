@@ -47,10 +47,10 @@ pub fn build(b: *std.Build) void {
         "gzlib.c",
         "gzread.c",
         "gzwrite.c",
-        "infback.c",
-        "inffast.c",
         "inflate.c",
+        "infback.c",
         "inftrees.c",
+        "inffast.c",
         "trees.c",
         "uncompr.c",
         "zutil.c",
@@ -63,6 +63,7 @@ pub fn build(b: *std.Build) void {
 
     lib.linkLibC();
     lib.installHeader(b.path("zlib.h"), "zlib.h");
+    lib.installHeader(config_header.getOutput(), "zconf.h");
 
     b.installArtifact(lib);
 }
