@@ -17,15 +17,20 @@ pub fn build(b: *std.Build) void {
     var flags = std.ArrayList([]const u8).init(b.allocator);
     defer flags.deinit();
 
-    // const config_header = b.addConfigHeader(
-    //     .{
-    //         .style = .{ .cmake = b.path("zconf.h.cmakein") }
-    //     },
-    //     .{
-    //         .GLOBAL_CLIENT_CONFIG = "KLLtestzlibclientconfig",
-    //     },
-    // );
-    // lib.addConfigHeader(config_header);
+    const config_header = b.addConfigHeader(
+        .{
+            .style = .{ .cmake = b.path("zconf.h.cmakein") },
+            .include_path = "zconf.h",
+        },
+        .{
+            .HAVE_SYS_TYPES_H = true,
+            .HAVE_STDINT_H = true,
+            .HAVE_STDDEF_H = true,
+            .HAVE_UNISTD_H = true,
+            .Z_HAVE_UNISTD_H = true,
+        },
+    );
+    lib.addConfigHeader(config_header);
 
     flags.appendSlice(&.{
         "-Wall",
